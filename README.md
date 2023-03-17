@@ -1,8 +1,6 @@
 # temperature-app
 
-This is a demo app that connects to an insight app module.
-
-#TODO docker instructions
+This is a demo app that demonstrates a sensor connection to an insight service.
 
 ## Project setup
 
@@ -10,6 +8,29 @@ This is a demo app that connects to an insight app module.
 cp .env.example .env
 yarn install
 ```
+
+### Via Docker
+
+This will load the entire application and make the web UI available at localhost:8080
+
+```sh
+docker-compose build
+docker-compose up
+```
+
+## Backend local dev
+
+```
+yarn start
+```
+
+To view the Swagger UI interface:
+
+```sh
+open http://localhost:5000/docs
+```
+
+## Front end Local dev
 
 ### Compiles and hot-reloads for development
 

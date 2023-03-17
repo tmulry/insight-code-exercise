@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { client } from '../../utils/client.js';
+import { client } from '../../utils/useClient.js';
 
 const { getInsight } = client();
 

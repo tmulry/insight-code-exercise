@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import App from './App.vue';
+import App from './client/src/App.vue';
 
 // Vuetify
 import 'vuetify/styles';

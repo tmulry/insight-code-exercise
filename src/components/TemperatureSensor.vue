@@ -22,7 +22,7 @@
         >
       </div>
       <div>
-        <label for="filteredDegrees">Filtered Degrees</label>
+        <label for="filteredDegrees">Filtered Degrees (Output Z)</label>
         <input
           id="filteredDegrees"
           v-model="filteredDegrees"
@@ -32,12 +32,12 @@
         >
       </div>
       <div>
-        <label for="filteredDegrees">Running Degrees</label>
+        <label for="runningDegrees">Running Degrees (Output Y)</label>
         <input
-          id="filteredDegrees"
-          v-model="filteredDegrees"
+          id="runningDegrees"
+          v-model="runningDegrees"
           type="number"
-          name="filteredDegrees"
+          name="runningDegrees"
           disabled
         >
       </div>
@@ -63,7 +63,7 @@ import { client } from '../composables/client.js';
 const { getInsight } = client();
 
 export default {
-  name: 'TemperatureTester',
+  name: 'TemperatureSensor',
   props: {
     heading: {
       type: String,
@@ -91,22 +91,21 @@ export default {
   },
   methods: {
     getRequestData() {
-      return {
+      return [ {
         'generated': '4567',
         'origin': 'testOrigin',
         'ts': new Date().getTime() * 1000,
-        'tags': { 'A': this.degrees,  'B': this.running ? 1 : 0},
-        'value': null
-      };
+        'tags': { 'A': `${this.degrees}`,  'B': `${this.running ? 1 : 0}`}
+      } ];
     },
 
-    async getDataFromApi() {
+    async getData() {
       this.loading = true;
       try {
         // get time in microseconds
-
         let response = await getInsight('temperature', this.getRequestData());
         const { filteredDegrees, runningDegrees } = this.getTemperatureFromResponse(response);
+        console.log('fr',filteredDegrees, runningDegrees);
         this.filteredDegrees = filteredDegrees;
         this.runningDegrees = runningDegrees;
         this.loading = false;
@@ -115,16 +114,13 @@ export default {
         console.log(error);
           
       }
-        
     },
 
     async checkTemperature() {
-      console.log('start checking');
       let maxChecks = 30;
       while( maxChecks-- > 0 && this.checking) {
-        console.log('checking');
         try {
-          await this.getDataFromApi();
+          await this.getData();
           // wait 10 seconds
           await new Promise(r => setTimeout(r, 10000));
         } catch (error) {
@@ -136,11 +132,9 @@ export default {
     },
 
     getTemperatureFromResponse(response) {
-      console.log(response);
-      // todo why? 
       return { 
-        //   filteredDegrees : response.data?[0].tags['Y'],
-        //  runningDegrees : response.data?[0].tags['Z'] 
+        filteredDegrees : response?.[1]?.[0]?.['Z'],
+        runningDegrees : response?.[1]?.[0]?.['Y'] 
       };
     }
   }

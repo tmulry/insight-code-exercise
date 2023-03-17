@@ -14,7 +14,7 @@ export const client = () => {
   };
 
   const getAvailableInsights = async () => {
-    // wait 1000 ms to simulate a slow connection
+    // wait 500 ms to simulate a slow connection
     await new Promise((resolve) => setTimeout(resolve, 500));
     const response = await client.post('/insights', {
       offset: 0,
@@ -25,7 +25,7 @@ export const client = () => {
   };
 
   const getInsight = async (functionId, data) => {
-    // wait 1000 ms to simulate a slow connection
+
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     const request = {
@@ -39,7 +39,7 @@ export const client = () => {
       history: {}
     };
     const response = await client.post('/process', request);
-    return response.data?.insights || [];
+    return response.data;
   };
 
   return { message, printMessage, getAvailableInsights, getInsight };

@@ -22,10 +22,9 @@
         <div><label>Name:</label> {{ d.name }}</div>
         <div><label>Description:</label> {{ d.description }}</div>
         <div><label>ID:</label> {{ d.id }}</div>
-        <div><label>Constants:</label> <pre>{{ JSON.stringify(d.constants, null, 2) }}</pre></div>
-
-        <div><label>Inlets:</label> <pre>{{ JSON.stringify(d.inlets, null, 2) }}</pre></div>
-        <div><label>Outlets:</label> <pre>{{ JSON.stringify(d.outlets, null, 2) }}</pre></div>
+        <div><label>Constants:</label> <pre>{{ prettyPrint(d.constants) }}</pre></div>
+        <div><label>Inlets:</label> <pre>{{ prettyPrint(d.inlets) }}</pre></div>
+        <div><label>Outlets:</label> <pre>{{ prettyPrint(d.outlets) }}</pre></div>
       </div>
     </div>
   </div>
@@ -50,10 +49,10 @@ export default {
     };
   },
   async created() {
-    await this.getDataFromApi();
+    await this.getData();
   },
   methods: {
-    async getDataFromApi() {
+    async getData() {
       this.loading = true;
       try {
         let response =  await getAvailableInsights();
@@ -62,9 +61,10 @@ export default {
       } catch (error) {
         this.loading = false;
         console.log(error);
-          
       }
-        
+    },
+    prettyPrint(obj) {
+      return JSON.stringify(obj, null, 2);
     }
   }
     

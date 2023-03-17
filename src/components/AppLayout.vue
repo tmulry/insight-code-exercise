@@ -9,19 +9,19 @@
       </div>
     </div>
     <div class="main">
-      <TemperatureTester heading="Temperature Checker" />
+      <TemperatureSensor heading="Temperature Checker" />
       <AvailableInsights heading="Available Insights" />
     </div>
   </div>
 </template> 
 
 <script>
-import TemperatureTester from './TemperatureTester.vue';
+import TemperatureSensor from './TemperatureSensor.vue';
 import AvailableInsights from './AvailableInsights.vue';
 export default {
   name: 'AppLayout',
   components: {
-    TemperatureTester,
+    TemperatureSensor,
     AvailableInsights
   }
 };

@@ -5,12 +5,12 @@ swagger: '2.0'
 ################################################################################
 info:
   version: "1.0"
-  title: Example Insight
+  title: Insight Code Exercise
   description: |
-    Example Insight
+    Insight Code Exercise
   contact:
     name: Exosite
-    email: support@exosite.com
+    email: tim@mulry.dev
 
 ################################################################################
 #                            API Information                                   #

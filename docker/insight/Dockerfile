@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:lts-alpine3.17
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install --only=production
+RUN yarn install
 
 # Bundle app source
 COPY . .

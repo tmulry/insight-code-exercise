@@ -9,6 +9,7 @@
     "plugin:vue/recommended"
   ],
   "rules": {
+    "no-unused-vars": [2, {"args": "none"}],
     "comma-dangle": "error",
     "quotes": [
       "error",

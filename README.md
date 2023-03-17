@@ -11,10 +11,26 @@ yarn install
 
 ### Via Docker
 
+This will load the entire application and make the web UI available at localhost:8080
+
 ```sh
-docker build . -t temp-sensor
-docker run --rm -it -p 8080:8080 temp-sensor
+docker-compose build
+docker-compose up
 ```
+
+## Backend local dev
+
+```
+yarn start
+```
+
+To view the Swagger UI interface:
+
+```sh
+open http://localhost:5000/docs
+```
+
+## Front end Local dev
 
 ### Compiles and hot-reloads for development
 

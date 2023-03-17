@@ -1,14 +1,19 @@
 # temperature-app
 
-This is a demo app that connects to an insight app module.
-
-#TODO docker instructions
+This is a demo app that demonstrates a sensor connection to an insight service.
 
 ## Project setup
 
 ```
 cp .env.example .env
 yarn install
+```
+
+### Via Docker
+
+```sh
+docker build . -t temp-sensor
+docker run --rm -it -p 8080:8080 temp-sensor
 ```
 
 ### Compiles and hot-reloads for development

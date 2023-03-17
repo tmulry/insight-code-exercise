@@ -14,7 +14,6 @@ const serverPort = process.env.PORT || 5000;
 
 app.use(responseTime());
 
-// app.use(morgan('combined'))
 app.use(
   morgan(
     ':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] - :response-time ms ":referrer" ":user-agent" ":req[x-exosite-tracking-id]"'

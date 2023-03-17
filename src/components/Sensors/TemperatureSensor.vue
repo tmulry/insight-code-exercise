@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { client } from '../composables/client.js';
+import { client } from '../../utils/client.js';
 
 const { getInsight } = client();
 
@@ -112,17 +112,16 @@ export default {
       } catch (error) {
         this.loading = false;
         console.log(error);
-          
       }
     },
 
     async checkTemperature() {
       let maxChecks = 30;
+      const pollingInterval = process.env.POLLING_INTERVAL*1000 || 1000;
       while( maxChecks-- > 0 && this.checking) {
         try {
           await this.getData();
-          // wait 10 seconds
-          await new Promise(r => setTimeout(r, 10000));
+          await new Promise(r => setTimeout(r, pollingInterval));
         } catch (error) {
           console.error(error);
           this.checking = false;

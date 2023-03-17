@@ -31,9 +31,10 @@
 </template>
 
 <script>
-import { client } from '../composables/client.js';
+import { client } from '../utils/client.js';
 
 const { getAvailableInsights } = client();
+
 export default {
   name: 'AvailableInsights',
   props: {
@@ -45,7 +46,8 @@ export default {
   data() {
     return {
       loading: false,
-      availableInsights: []
+      availableInsights: [],
+      client: client
     };
   },
   async created() {

@@ -1,21 +1,18 @@
-import { ref } from 'vue';
+
 import axios from 'axios';
 
 export const client = () => {
-  const message = ref('This message is in our composable!');
-  //   todo make host and solution an env var?
-  const solution_id = 1234;
+
+
+  const host = process.env.INSIGHT_HOST || 'http://localhost:5000';
+  const solution_id = process.env.SOLUTION_ID || 1234;
   const client = axios.create({
-    baseURL: `http://localhost:5000/api/v1/${solution_id}/`,
+    baseURL: `${host}/api/v1/${solution_id}/`,
     timeout: 1000
   });
-  const printMessage = () => {
-    console.log(message.value);
-  };
+
 
   const getAvailableInsights = async () => {
-    // wait 500 ms to simulate a slow connection
-    await new Promise((resolve) => setTimeout(resolve, 500));
     const response = await client.post('/insights', {
       offset: 0,
       group_id: 'test',
@@ -25,8 +22,6 @@ export const client = () => {
   };
 
   const getInsight = async (functionId, data) => {
-
-    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const request = {
       args: {
@@ -42,5 +37,5 @@ export const client = () => {
     return response.data;
   };
 
-  return { message, printMessage, getAvailableInsights, getInsight };
+  return { getAvailableInsights, getInsight };
 };

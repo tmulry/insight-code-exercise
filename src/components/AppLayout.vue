@@ -16,7 +16,7 @@
 </template> 
 
 <script>
-import TemperatureSensor from './TemperatureSensor.vue';
+import TemperatureSensor from './Sensors/TemperatureSensor.vue';
 import AvailableInsights from './AvailableInsights.vue';
 export default {
   name: 'AppLayout',
